@@ -212,8 +212,28 @@ if __name__ == '__main__':
                  'privacyconsern': 'https://github.com/1-IT-Gymnazium/8-loops-privacyconsern'}
     detector = PlagDetector()
 
-    detector.clone_github_repos(repo_urls)
-    detector.create_files_dict("tasks.js")
+    # detector.clone_github_repos(repo_urls)
+    # detector.create_files_dict("tasks.js")
+    detector.files_dict = {'Eliška Semorádová': '/tmp/tmp6q5omo99/8-loops-Awyyn/tasks.js',
+                           'Filip Janoušek': '/tmp/tmp6q5omo99/8-loops-FilipnotfounD/tasks.js',
+                           'Filip Černý': '/tmp/tmp6q5omo99/8-loops-FilipCer/tasks.js',
+                           'Honza-Hoff': '/tmp/tmp6q5omo99/8-loops-Honza-Hoff/tasks.js',
+                           'Jakub Lehar': '/tmp/tmp6q5omo99/8-loops-notkorasek/tasks.js',
+                           'Jakub Oškera': '/tmp/tmp6q5omo99/8-loops-oskyc/tasks.js',
+                           'Janek Hujer': '/tmp/tmp6q5omo99/8-loops-WestrCZ/tasks.js',
+                           'Jáchym Ježek': '/tmp/tmp6q5omo99/8-loops-JJJezek/tasks.js',
+                           'Lukáš Otáhal': '/tmp/tmp6q5omo99/8-loops-Otahlu/tasks.js',
+                           'Mariana Lipková': '/tmp/tmp6q5omo99/8-loops-Amyk22/tasks.js',
+                           'Matyáš Jan Diviš': '/tmp/tmp6q5omo99/8-loops-mejtxd/tasks.js',
+                           'Matěj Fibiger': '/tmp/tmp6q5omo99/8-loops-Matejop/tasks.js',
+                           'Matěj Hladeček': '/tmp/tmp6q5omo99/8-loops-Chnapak/tasks.js',
+                           'Maxime Gabarre': '/tmp/tmp6q5omo99/8-loops-gameprotoCZECH/tasks.js',
+                           'Mykola Ivanko': '/tmp/tmp6q5omo99/8-loops-Stormmm4128/tasks.js',
+                           'Nicol Rozumová': '/tmp/tmp6q5omo99/8-loops-nikuskaaa/tasks.js',
+                           'Sarah Štěpánová': '/tmp/tmp6q5omo99/8-loops-Sarash-s/tasks.js',
+                           'Sebastian Jirkal': '/tmp/tmp6q5omo99/8-loops-Sejge/tasks.js',
+                           'Tobiáš Špringr': '/tmp/tmp6q5omo99/8-loops-Gravitak/tasks.js',
+                           'privacyconsern': '/tmp/tmp6q5omo99/8-loops-privacyconsern/tasks.js'}
     pprint(detector.files_dict)
     plagiarism_results = detector.compare_files()
     print(json.dumps(plagiarism_results, ensure_ascii=False))
