@@ -110,19 +110,18 @@ class PlagDetector:
             files_dict[user] = full_path
         self.files_dict = files_dict
 
-    def create_collaboration_graph(self, plagiarism_results):
+    def create_networkx_graph(self, plagiarism_results):
         G = nx.Graph()
-
-        # Přidání uzlů a hran do grafu
         for result in plagiarism_results:
             user1, user2 = result['pair']
             similarity = result['similarity']
             G.add_edge(user1, user2, weight=similarity)
+        return G
 
-        # Výpočet pozic uzlů
-        pos = nx.spring_layout(G)
+    def calculate_positions(self, G):
+        return nx.spring_layout(G)
 
-        # Vytvoření hran a uzlů pro Plotly graf
+    def create_edges_trace(self, G, pos):
         edge_x = []
         edge_y = []
         for edge in G.edges():
@@ -136,7 +135,9 @@ class PlagDetector:
             line=dict(width=0.5, color='#888'),
             hoverinfo='none',
             mode='lines')
+        return edge_trace
 
+    def create_nodes_trace(self, G, pos):
         node_x = []
         node_y = []
         for node in G.nodes():
@@ -160,15 +161,11 @@ class PlagDetector:
                     titleside='right'
                 ),
                 line_width=2))
-
-        # Přidání textu k uzlům (názvy uživatelů)
-        node_text = []
-        for node in G.nodes():
-            node_text.append(node)
-
+        node_text = [node for node in G.nodes()]
         node_trace.text = node_text
+        return node_trace
 
-        # Vytvoření grafu
+    def draw_plotly_graph(self, edge_trace, node_trace):
         fig = go.Figure(data=[edge_trace, node_trace],
                         layout=go.Layout(
                             title='Interaktivní graf spolupráce mezi uživateli',
@@ -184,8 +181,15 @@ class PlagDetector:
                             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
                         )
-
         fig.show()
+
+    # Hlavní funkce pro sestavení grafu
+    def create_collaboration_graph(self, plagiarism_results):
+        G = self.create_networkx_graph(plagiarism_results)
+        pos = self.calculate_positions(G)
+        edge_trace = self.create_edges_trace(G, pos)
+        node_trace = self.create_nodes_trace(G, pos)
+        self.draw_plotly_graph(edge_trace, node_trace)
 
 
 if __name__ == '__main__':
