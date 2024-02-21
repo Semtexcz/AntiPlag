@@ -13,9 +13,13 @@ esprima = "^4.0.1"
 matplotlib = "^3.8.2"
 networkx = "^3.2.1"
 plotly = "^5.18.0"
+click = "^8.1.7"
 
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+antiplag = "antiplag.cli:antiplag"
